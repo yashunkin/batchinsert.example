@@ -1,5 +1,6 @@
 ﻿using BatchInsert.Example.Dapper;
 using BatchInsert.Example.MinimalAPI.ApiModels.Requests;
+using BatchInsert.Example.MinimalAPI.ApiModels.Responses;
 using BatchInsert.Example.MinimalAPI.Converters;
 using BatchInsert.Example.MinimalAPI.Helpers.EndpointRouteHandler;
 using BatchInsert.Example.MinimalAPI.Repositories;
@@ -16,16 +17,24 @@ public class ShopProductsHandler(
 
     public void MapEndpoints(IEndpointRouteBuilder app)
     {
-        app.MapPost(GetApiMethod(nameof(AddShopsWithProductsRequest)), AddShopsWithProductsAsync);
+        app.MapPost(GetApiMethod("AddShopsAndProducts"), AddShopsAndProductsAsync);
+        app.MapGet(GetApiMethod("GetShopsAndProducts"), GetShopsAndProductsAsync);
     }
 
-    private async Task<IResult> AddShopsWithProductsAsync(
-        AddShopsWithProductsRequest request,
+    private async Task<IResult> GetShopsAndProductsAsync(ShopProductsService service)
+    {
+        var result = await service.GetShopsAndProductsAsync();
+
+        return Results.Ok(result);
+    }
+
+    private async Task<IResult> AddShopsAndProductsAsync(
+        AddShopsAndProductsRequest request,
         ShopProductsService service)
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 
-        await service.AddShopsWithProductsAsync(request);
+        await service.AddShopsAndProductsAsync(request);
 
         return Results.Ok();
     }

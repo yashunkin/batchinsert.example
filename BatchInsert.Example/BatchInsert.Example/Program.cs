@@ -48,6 +48,7 @@ static void AddServices(WebApplicationBuilder builder)
     builder.Services.AddScoped<DbRepository>();
     builder.Services.AddScoped<ShopProductsService>();
     builder.Services.AddSingleton<RequestToDbConverter>();
+    builder.Services.AddSingleton<DbToResponseConverter>();
 }
 
 static void MapComposites(NpgsqlDataSourceBuilder builder)

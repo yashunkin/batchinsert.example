@@ -13,11 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApiModels\Responses\" />
-    <Folder Include="Repositories\DbModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BatchInsert.Example.DB\BatchInsert.Example.Dapper.csproj" />
   </ItemGroup>
 

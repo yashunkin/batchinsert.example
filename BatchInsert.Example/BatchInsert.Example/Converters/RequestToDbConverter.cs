@@ -5,7 +5,7 @@ namespace BatchInsert.Example.MinimalAPI.Converters;
 
 public class RequestToDbConverter
 {
-    public (IReadOnlyCollection<ShopDbType>,  IReadOnlyCollection<ProductDbType>) Convert(AddShopsWithProductsRequest request)
+    public (IReadOnlyCollection<ShopDbType>,  IReadOnlyCollection<ProductDbType>) Convert(AddShopsAndProductsRequest request)
     {
         ArgumentNullException.ThrowIfNull(request, nameof(request));
 

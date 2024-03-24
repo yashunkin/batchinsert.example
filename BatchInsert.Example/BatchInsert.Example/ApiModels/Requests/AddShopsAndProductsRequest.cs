@@ -1,5 +1,5 @@
 ﻿namespace BatchInsert.Example.MinimalAPI.ApiModels.Requests;
 
-public record AddShopsWithProductsRequest(
+public record AddShopsAndProductsRequest(
     IReadOnlyCollection<Shop> Shops);
 
