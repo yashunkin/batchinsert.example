@@ -1,2 +1,2 @@
 # batchinsert.example
-Example of CRUD operations using Minimal API and PG
+Example of select/insert operations using Minimal API and PG
