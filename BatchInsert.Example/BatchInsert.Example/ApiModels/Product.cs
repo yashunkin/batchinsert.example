@@ -1,5 +1,5 @@
 ﻿namespace BatchInsert.Example.MinimalAPI.ApiModels;
 
 public record Product(
-    long ProductId,
-    string? Description);
+    string Name,
+    decimal Price);

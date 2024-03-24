@@ -4,17 +4,9 @@ using System.Data;
 
 namespace BatchInsert.Example.Dapper
 {
-    public class ContextBase
+    public abstract class ContextBase(NpgsqlDataSource dataSource)
     {
-        private readonly string _connectionString;
-
-        protected ContextBase(string connectionString) 
-            => _connectionString = !string.IsNullOrWhiteSpace(connectionString)
-                ? connectionString
-                : throw new ArgumentException(nameof(connectionString));
-
-        protected virtual IDbConnection CreateConnection()
-            => new NpgsqlConnection(_connectionString);
+        private readonly NpgsqlDataSource _dataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
 
         public async Task<IEnumerable<T>> QueryAysnc<T>(
             string sql,
@@ -22,7 +14,7 @@ namespace BatchInsert.Example.Dapper
             int? timeout = null,
             CancellationToken ct = default)
         {
-            using var connection = CreateConnection();
+            using var connection = await _dataSource.OpenConnectionAsync();
 
             return await connection.QueryAsync<T>(
                 new CommandDefinition(
@@ -35,15 +27,17 @@ namespace BatchInsert.Example.Dapper
         public async Task<int> ExecuteAysnc(
             string sql,
             object? param = null,
+            CommandType? commandType = null,
             int? timeout = null,
             CancellationToken ct = default)
         {
-            using var connection = CreateConnection();
+            using var connection = await _dataSource.OpenConnectionAsync();
 
             return await connection.ExecuteAsync(
                 new CommandDefinition(
                     sql,
                     param,
+                    commandType: commandType,
                     commandTimeout: timeout,
                     cancellationToken: ct));
         }

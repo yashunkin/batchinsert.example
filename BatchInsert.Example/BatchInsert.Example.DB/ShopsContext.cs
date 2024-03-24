@@ -1,9 +1,8 @@
-﻿namespace BatchInsert.Example.Dapper;
+﻿using Npgsql;
 
-public class ShopsContext : ContextBase
+namespace BatchInsert.Example.Dapper;
+
+public class ShopsContext(NpgsqlDataSource dataSource) 
+    : ContextBase(dataSource)
 {
-    protected ShopsContext(string connectionString) 
-        : base(connectionString)
-    {
-    }
 }
