@@ -2,8 +2,6 @@
 using BatchInsert.Example.MinimalAPI.Repositories.DbModels;
 using BatchInsert.Example.MinimalAPI.Repositories.DbTypes;
 using Dapper;
-using NpgsqlTypes;
-using System.Data;
 
 namespace BatchInsert.Example.MinimalAPI.Repositories;
 
